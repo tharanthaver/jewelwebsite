@@ -17,7 +17,7 @@ const allProducts = [
   { id: "9", name: "Ruby Drop Earrings", price: 95000, image: "https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=600&q=80", category: "earrings", metal: "gold", purity: "18K" },
   { id: "10", name: "Bridal Choker Set", price: 320000, image: "https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=600&q=80", category: "bridal", metal: "gold", purity: "22K" },
   { id: "11", name: "Kundan Bridal Necklace", price: 285000, image: "https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=600&q=80", category: "bridal", metal: "gold", purity: "22K" },
-  { id: "12", name: "Diamond Bridal Set", price: 450000, image: "https://images.unsplash.com/photo-1601121141418-c1cc62685158?w=600&q=80", category: "bridal", metal: "gold", purity: "18K" },
+  { id: "12", name: "Diamond Bridal Set", price: 450000, image: "https://images.unsplash.com/photo-1600721391776-b5cd0e0048f9?w=600&q=80", category: "bridal", metal: "gold", purity: "18K" },
   { id: "13", name: "Vintage Rose Ring", price: 89000, image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=600&q=80", category: "rings", metal: "gold", purity: "18K" },
   { id: "14", name: "Sapphire Statement Ring", price: 210000, image: "https://images.unsplash.com/photo-1608042314453-ae338d80c427?w=600&q=80", category: "rings", metal: "platinum", purity: "Platinum" },
   { id: "15", name: "Temple Gold Necklace", price: 175000, image: "https://images.unsplash.com/photo-1611107683227-e9060eccd846?w=600&q=80", category: "necklaces", metal: "gold", purity: "22K" },
@@ -25,7 +25,7 @@ const allProducts = [
   { id: "17", name: "Chandelier Earrings", price: 125000, image: "https://images.unsplash.com/photo-1629224316810-9d8805b95e76?w=600&q=80", category: "earrings", metal: "gold", purity: "18K" },
   { id: "18", name: "Minimalist Gold Chain", price: 35000, image: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80", category: "necklaces", metal: "gold", purity: "18K" },
   { id: "19", name: "Antique Finish Bangles", price: 145000, image: "https://images.unsplash.com/photo-1610694955371-d4a3e0ce4b52?w=600&q=80", category: "bridal", metal: "gold", purity: "22K" },
-  { id: "20", name: "Contemporary Pearl Studs", price: 28000, image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&q=80", category: "earrings", metal: "gold", purity: "18K" },
+  { id: "20", name: "Contemporary Pearl Studs", price: 28000, image: "https://images.unsplash.com/photo-1590548784585-643d2b9f2925?w=600&q=80", category: "earrings", metal: "gold", purity: "18K" },
 ];
 
 const categories = [
