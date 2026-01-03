@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import Lenis from "@studio-freight/lenis";
 import { ZoomParallax } from "@/components/ui/zoom-parallax";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/components/Header";
@@ -48,21 +46,6 @@ const goldImages = [
 ];
 
 const Index = () => {
-  useEffect(() => {
-    const lenis = new Lenis();
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
   return (
     <div className="min-h-screen bg-background texture-noise">
       {/* Announcement Bar */}
