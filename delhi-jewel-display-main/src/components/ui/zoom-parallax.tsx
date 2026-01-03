@@ -36,13 +36,26 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 						<motion.div
 							key={index}
 							style={{ scale }}
-							className={`absolute top-0 flex h-full w-full items-center justify-center ${index === 1 ? '[&>div]:!-top-[30vh] [&>div]:!left-[5vw] [&>div]:!h-[30vh] [&>div]:!w-[35vw]' : ''} ${index === 2 ? '[&>div]:!-top-[10vh] [&>div]:!-left-[25vw] [&>div]:!h-[45vh] [&>div]:!w-[20vw]' : ''} ${index === 3 ? '[&>div]:!left-[27.5vw] [&>div]:!h-[25vh] [&>div]:!w-[25vw]' : ''} ${index === 4 ? '[&>div]:!top-[27.5vh] [&>div]:!left-[5vw] [&>div]:!h-[25vh] [&>div]:!w-[20vw]' : ''} ${index === 5 ? '[&>div]:!top-[27.5vh] [&>div]:!-left-[22.5vw] [&>div]:!h-[25vh] [&>div]:!w-[30vw]' : ''} ${index === 6 ? '[&>div]:!top-[22.5vh] [&>div]:!left-[25vw] [&>div]:!h-[15vh] [&>div]:!w-[15vw]' : ''} `}
+							className={`absolute top-0 flex h-full w-full items-center justify-center ${
+								index === 1 ? '[&>div]:!-top-[35vh] [&>div]:!left-[10vw] [&>div]:!h-[40vh] [&>div]:!w-[40vw]' : ''
+							} ${
+								index === 2 ? '[&>div]:!-top-[15vh] [&>div]:!-left-[30vw] [&>div]:!h-[50vh] [&>div]:!w-[25vw]' : ''
+							} ${
+								index === 3 ? '[&>div]:!left-[35vw] [&>div]:!h-[35vh] [&>div]:!w-[30vw]' : ''
+							} ${
+								index === 4 ? '[&>div]:!top-[35vh] [&>div]:!left-[8vw] [&>div]:!h-[35vh] [&>div]:!w-[25vw]' : ''
+							} ${
+								index === 5 ? '[&>div]:!top-[35vh] [&>div]:!-left-[30vw] [&>div]:!h-[35vh] [&>div]:!w-[35vw]' : ''
+							} ${
+								index === 6 ? '[&>div]:!top-[25vh] [&>div]:!left-[30vw] [&>div]:!h-[25vh] [&>div]:!w-[20vw]' : ''
+							} `}
 						>
-							<div className="relative h-[25vh] w-[25vw]">
+							<div className="relative h-[30vh] w-[30vw] overflow-hidden rounded-2xl shadow-2xl border border-white/10 bg-stone-100">
 								<img
-									src={src || '/placeholder.svg'}
+									src={src || 'https://images.unsplash.com/photo-1611085583191-a3b13b24424a?w=800&q=80'}
 									alt={alt || `Parallax image ${index + 1}`}
-									className="h-full w-full object-cover"
+									className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
+									loading="lazy"
 								/>
 							</div>
 						</motion.div>
