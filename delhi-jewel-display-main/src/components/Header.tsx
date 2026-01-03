@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Heart, Sparkles } from "lucide-react";
+import { Menu, X, Heart, Sparkles, ShoppingCart } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { useWishlist } from "@/contexts/WishlistContext";
+import { useCart } from "@/contexts/CartContext";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -14,6 +16,8 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { items: wishlistItems } = useWishlist();
+  const { totalItems: cartItems } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -102,7 +106,7 @@ const Header = () => {
             
             <Link
               to="/products"
-              className="ml-4 flex items-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground text-sm font-medium tracking-wide hover:shadow-glow hover:-translate-y-0.5 transition-all duration-300 group overflow-hidden relative"
+              className="ml-4 flex items-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground text-sm font-medium tracking-wide hover:shadow-glow hover:-translate-y-0.5 transition-all duration-300 group overflow-hidden relative rounded-full"
             >
               <span className="absolute inset-0 bg-gradient-shimmer -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               <Sparkles className="w-4 h-4 relative z-10" />
@@ -110,7 +114,7 @@ const Header = () => {
             </Link>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Link
               to="/wishlist"
               className="p-2.5 text-foreground hover:text-primary transition-all duration-300 relative group"
@@ -118,6 +122,25 @@ const Header = () => {
             >
               <span className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-all duration-300 rounded-full scale-0 group-hover:scale-100" />
               <Heart className="w-5 h-5 relative z-10 group-hover:scale-110 transition-transform duration-300" />
+              {wishlistItems.length > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-primary-foreground text-xs flex items-center justify-center rounded-full">
+                  {wishlistItems.length}
+                </span>
+              )}
+            </Link>
+
+            <Link
+              to="/cart"
+              className="p-2.5 text-foreground hover:text-primary transition-all duration-300 relative group"
+              aria-label="Cart"
+            >
+              <span className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-all duration-300 rounded-full scale-0 group-hover:scale-100" />
+              <ShoppingCart className="w-5 h-5 relative z-10 group-hover:scale-110 transition-transform duration-300" />
+              {cartItems > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-primary-foreground text-xs flex items-center justify-center rounded-full">
+                  {cartItems}
+                </span>
+              )}
             </Link>
             
             <button
@@ -179,19 +202,27 @@ const Header = () => {
             )
           ))}
           <div 
-            className="pt-6 mt-6 border-t border-border"
+            className="pt-6 mt-6 border-t border-border flex gap-4"
             style={{ 
               transitionDelay: isMobileMenuOpen ? '250ms' : '0ms',
               opacity: isMobileMenuOpen ? 1 : 0
             }}
           >
             <Link
-              to="/products"
+              to="/wishlist"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="btn-outline inline-flex items-center gap-2 text-sm"
+            >
+              <Heart className="w-4 h-4" />
+              Wishlist ({wishlistItems.length})
+            </Link>
+            <Link
+              to="/cart"
               onClick={() => setIsMobileMenuOpen(false)}
               className="btn-primary inline-flex items-center gap-2 text-sm"
             >
-              <Sparkles className="w-4 h-4" />
-              Explore Collections
+              <ShoppingCart className="w-4 h-4" />
+              Cart ({cartItems})
             </Link>
           </div>
         </nav>

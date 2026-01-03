@@ -164,15 +164,7 @@ const Products = () => {
             </div>
           </div>
           
-          <a 
-            href="#products"
-            className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-all duration-300 cursor-pointer group ${isHeroVisible ? 'opacity-100' : 'opacity-0'}`}
-            style={{ transitionDelay: '600ms' }}
-          >
-            <span className="text-xs uppercase tracking-wider">Scroll to explore</span>
-            <ChevronDown className="w-5 h-5 animate-bounce" />
-          </a>
-        </div>
+          </div>
 
         <div id="products" className="pt-16 pb-24">
           <div className="container-modern">
@@ -289,76 +281,81 @@ const Products = () => {
                     </button>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-                    {filteredProducts.map((product, index) => (
-                      <div 
-                        key={product.id} 
-                        className="group animate-fade-up"
-                        style={{ animationDelay: `${index * 50}ms` }}
-                        onMouseEnter={() => setHoveredProduct(product.id)}
-                        onMouseLeave={() => setHoveredProduct(null)}
-                      >
-                        <div className="relative aspect-[3/4] overflow-hidden bg-muted mb-4 rounded-xl">
-                          <img
-                            src={product.image}
-                            alt={product.name}
-                            className={`w-full h-full object-cover transition-all duration-700 ${
-                              hoveredProduct === product.id ? 'scale-110 brightness-105' : 'scale-100'
-                            }`}
-                          />
-                          
-                          <div className={`absolute inset-0 bg-gradient-to-t from-noir/60 via-transparent to-transparent transition-opacity duration-500 ${
-                            hoveredProduct === product.id ? 'opacity-100' : 'opacity-0'
-                          }`} />
-                          
-                          <button
-                            onClick={() => handleWishlistToggle(product)}
-                            className={`absolute top-4 right-4 w-10 h-10 flex items-center justify-center transition-all duration-300 rounded-full ${
-                              isInWishlist(product.id)
-                                ? "bg-primary text-primary-foreground scale-110"
-                                : "bg-background/90 text-foreground hover:bg-primary hover:text-primary-foreground"
-                            }`}
-                            aria-label={isInWishlist(product.id) ? "Remove from wishlist" : "Add to wishlist"}
-                          >
-                            <Heart
-                              className={`w-5 h-5 transition-transform duration-300 ${isInWishlist(product.id) ? "fill-current scale-110" : ""}`}
-                            />
-                          </button>
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+                      {filteredProducts.map((product, index) => (
+                        <div 
+                          key={product.id} 
+                          className="group animate-fade-up"
+                          style={{ animationDelay: `${index * 50}ms` }}
+                          onMouseEnter={() => setHoveredProduct(product.id)}
+                          onMouseLeave={() => setHoveredProduct(null)}
+                        >
+                          <Link to={`/product/${product.id}`} className="block">
+                            <div className="relative aspect-[3/4] overflow-hidden bg-muted mb-4 rounded-xl">
+                              <img
+                                src={product.image}
+                                alt={product.name}
+                                className={`w-full h-full object-cover transition-all duration-700 ${
+                                  hoveredProduct === product.id ? 'scale-110 brightness-105' : 'scale-100'
+                                }`}
+                              />
+                              
+                              <div className={`absolute inset-0 bg-gradient-to-t from-noir/60 via-transparent to-transparent transition-opacity duration-500 ${
+                                hoveredProduct === product.id ? 'opacity-100' : 'opacity-0'
+                              }`} />
+                              
+                              <button
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  handleWishlistToggle(product);
+                                }}
+                                className={`absolute top-4 right-4 w-10 h-10 flex items-center justify-center transition-all duration-300 rounded-full z-10 ${
+                                  isInWishlist(product.id)
+                                    ? "bg-primary text-primary-foreground scale-110"
+                                    : "bg-background/90 text-foreground hover:bg-primary hover:text-primary-foreground"
+                                }`}
+                                aria-label={isInWishlist(product.id) ? "Remove from wishlist" : "Add to wishlist"}
+                              >
+                                <Heart
+                                  className={`w-5 h-5 transition-transform duration-300 ${isInWishlist(product.id) ? "fill-current scale-110" : ""}`}
+                                />
+                              </button>
 
-                          <div className={`absolute bottom-4 left-4 right-4 flex items-center justify-center gap-3 transition-all duration-500 ${
-                            hoveredProduct === product.id ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                          }`}>
-                            <button className="flex-1 flex items-center justify-center gap-2 py-3 bg-background text-foreground text-sm font-medium rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300">
-                              <Eye className="w-4 h-4" />
-                              Quick View
-                            </button>
-                          </div>
+                              <div className={`absolute bottom-4 left-4 right-4 flex items-center justify-center gap-3 transition-all duration-500 ${
+                                hoveredProduct === product.id ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                              }`}>
+                                <span className="flex-1 flex items-center justify-center gap-2 py-3 bg-background text-foreground text-sm font-medium rounded-full">
+                                  <Eye className="w-4 h-4" />
+                                  View Details
+                                </span>
+                              </div>
 
-                          <div className={`absolute top-4 left-4 transition-all duration-300 ${
-                            hoveredProduct === product.id ? 'opacity-100' : 'opacity-0'
-                          }`}>
-                            <span className="px-3 py-1.5 bg-background/90 text-xs font-medium uppercase tracking-wider rounded-full">
-                              {product.purity} {product.metal}
-                            </span>
-                          </div>
+                              <div className={`absolute top-4 left-4 transition-all duration-300 ${
+                                hoveredProduct === product.id ? 'opacity-100' : 'opacity-0'
+                              }`}>
+                                <span className="px-3 py-1.5 bg-background/90 text-xs font-medium uppercase tracking-wider rounded-full">
+                                  {product.purity} {product.metal}
+                                </span>
+                              </div>
+                            </div>
+                          </Link>
+
+                          <Link to={`/product/${product.id}`} className="block space-y-2">
+                            <p className={`text-[10px] uppercase tracking-super text-muted-foreground transition-all duration-300 ${
+                              hoveredProduct === product.id ? 'text-primary' : ''
+                            }`}>
+                              {product.category}
+                            </p>
+                            <h3 className="font-serif text-lg md:text-xl group-hover:text-primary transition-colors duration-300">
+                              {product.name}
+                            </h3>
+                            <p className="font-medium text-lg">
+                              ₹{product.price.toLocaleString("en-IN")}
+                            </p>
+                          </Link>
                         </div>
-
-                        <div className="space-y-2">
-                          <p className={`text-[10px] uppercase tracking-super text-muted-foreground transition-all duration-300 ${
-                            hoveredProduct === product.id ? 'text-primary' : ''
-                          }`}>
-                            {product.category}
-                          </p>
-                          <h3 className="font-serif text-lg md:text-xl group-hover:text-primary transition-colors duration-300">
-                            {product.name}
-                          </h3>
-                          <p className="font-medium text-lg">
-                            ₹{product.price.toLocaleString("en-IN")}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
                 )}
               </div>
             </div>
