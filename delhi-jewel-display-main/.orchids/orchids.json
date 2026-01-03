@@ -1,0 +1,7 @@
+{
+  "projectId": "589ab987-344a-4d2b-a20d-49d9e17d0b5a",
+  "createdAt": 1767449238112,
+  "startupCommands": [
+    "cd delhi-jewel-display-main && bun install && node node_modules/vite/bin/vite.js"
+  ]
+}
