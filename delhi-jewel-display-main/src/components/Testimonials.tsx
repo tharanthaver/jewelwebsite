@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, Quote, Sparkles } from "lucide-react";
 
 const testimonials = [
   {
@@ -39,6 +39,7 @@ const testimonials = [
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [direction, setDirection] = useState<'left' | 'right'>('right');
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const Testimonials = () => {
       ([entry]) => {
         if (entry.isIntersecting) setIsVisible(true);
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -55,104 +56,133 @@ const Testimonials = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      setDirection('right');
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
     }, 6000);
     return () => clearInterval(interval);
   }, []);
 
+  const goToPrev = () => {
+    setDirection('left');
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const goToNext = () => {
+    setDirection('right');
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
   return (
-    <section id="reviews" ref={sectionRef} className="section-padding bg-background">
-      <div className="container-modern">
-        {/* Header */}
+    <section id="reviews" ref={sectionRef} className="section-padding bg-background relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+      </div>
+      
+      <div className="container-modern relative">
         <div
-          className={`text-center mb-20 transition-all duration-1000 ${
+          className={`text-center mb-16 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <p className="text-xs uppercase tracking-ultra text-primary mb-4">Testimonials</p>
+          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-ultra text-primary mb-4 bg-primary/10 px-4 py-2 rounded-full">
+            <Sparkles className="w-4 h-4" />
+            Testimonials
+          </div>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium">
             Stories That
             <br />
-            <span className="italic">Sparkle</span>
+            <span className="italic text-gradient">Sparkle</span>
           </h2>
         </div>
 
-        {/* Testimonial */}
         <div
-          className={`max-w-4xl mx-auto transition-all duration-1000 delay-200 ${
+          className={`max-w-5xl mx-auto transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <div className="relative">
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.id}
-                className={`transition-all duration-700 ${
-                  index === currentIndex
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-4 absolute inset-0 pointer-events-none"
-                }`}
-              >
-                <div className="text-center">
-                  {/* Stars */}
-                  <div className="flex justify-center gap-1 mb-8">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                    ))}
-                  </div>
+          <div className="relative bg-muted/30 rounded-3xl p-8 md:p-16 overflow-hidden">
+            <Quote className="absolute top-8 left-8 w-20 h-20 text-primary/10" />
+            
+            <div className="relative min-h-[320px]">
+              {testimonials.map((testimonial, index) => (
+                <div
+                  key={testimonial.id}
+                  className={`transition-all duration-700 ${
+                    index === currentIndex
+                      ? "opacity-100 translate-x-0"
+                      : `opacity-0 ${direction === 'right' ? '-translate-x-8' : 'translate-x-8'} absolute inset-0 pointer-events-none`
+                  }`}
+                >
+                  <div className="text-center">
+                    <div className="flex justify-center gap-1.5 mb-8">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star 
+                          key={i} 
+                          className="w-5 h-5 fill-primary text-primary animate-pulse" 
+                          style={{ animationDelay: `${i * 100}ms` }}
+                        />
+                      ))}
+                    </div>
 
-                  {/* Quote */}
-                  <p className="font-serif text-2xl md:text-3xl lg:text-4xl leading-relaxed mb-10 text-foreground">
-                    "{testimonial.text}"
-                  </p>
+                    <p className="font-serif text-xl md:text-2xl lg:text-3xl leading-relaxed mb-10 text-foreground">
+                      "{testimonial.text}"
+                    </p>
 
-                  {/* Author */}
-                  <div className="flex items-center justify-center gap-4">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className="w-14 h-14 rounded-full object-cover"
-                    />
-                    <div className="text-left">
-                      <p className="font-medium">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.location}</p>
+                    <div className="flex items-center justify-center gap-4">
+                      <div className="relative">
+                        <img
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          className="w-16 h-16 rounded-full object-cover ring-4 ring-background shadow-elevated"
+                        />
+                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                          <Sparkles className="w-3 h-3 text-primary-foreground" />
+                        </div>
+                      </div>
+                      <div className="text-left">
+                        <p className="font-medium text-lg">{testimonial.name}</p>
+                        <p className="text-sm text-muted-foreground">{testimonial.location}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-12">
-            <button
-              onClick={() => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-              className="w-12 h-12 border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
-              aria-label="Previous"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            
-            <div className="flex gap-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 transition-all duration-300 ${
-                    currentIndex === index ? "bg-primary w-8" : "bg-border"
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
               ))}
             </div>
 
-            <button
-              onClick={() => setCurrentIndex((prev) => (prev + 1) % testimonials.length)}
-              className="w-12 h-12 border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
-              aria-label="Next"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+            <div className="flex items-center justify-center gap-6 mt-12">
+              <button
+                onClick={goToPrev}
+                className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 group"
+                aria-label="Previous"
+              >
+                <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform duration-300" />
+              </button>
+              
+              <div className="flex gap-2">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setDirection(index > currentIndex ? 'right' : 'left');
+                      setCurrentIndex(index);
+                    }}
+                    className={`h-2 rounded-full transition-all duration-500 ${
+                      currentIndex === index ? "bg-primary w-8" : "bg-border w-2 hover:bg-primary/50"
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={goToNext}
+                className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 group"
+                aria-label="Next"
+              >
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform duration-300" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
