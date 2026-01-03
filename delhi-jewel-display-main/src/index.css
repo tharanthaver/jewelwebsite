@@ -128,7 +128,7 @@ CUSTOMIZATION GUIDE:
   html {
     scroll-behavior: smooth;
   }
-
+  
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Outfit', sans-serif;
@@ -236,27 +236,7 @@ CUSTOMIZATION GUIDE:
 /* Smooth Scroll */
 @supports (scroll-behavior: smooth) {
   html {
-    /* Lenis handled smooth scroll */
-  }
-
-  html.lenis, html.lenis body {
-    height: auto;
-  }
-
-  .lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-  }
-
-  .lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-  }
-
-  .lenis.lenis-stopped {
-    overflow: hidden;
-  }
-
-  .lenis.lenis-scrolling iframe {
-    pointer-events: none;
+    scroll-behavior: smooth;
   }
 }
 

@@ -10,7 +10,7 @@ const allProducts = [
   { id: "2", name: "Classic Gold Band", price: 45000, image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80", category: "rings", metal: "gold", purity: "22K" },
   { id: "3", name: "Emerald Cut Engagement Ring", price: 185000, image: "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=600&q=80", category: "rings", metal: "platinum", purity: "Platinum" },
   { id: "4", name: "Pearl Drop Necklace", price: 78000, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80", category: "necklaces", metal: "gold", purity: "18K" },
-    { id: "5", name: "Diamond Pendant Chain", price: 156000, image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800", category: "necklaces", metal: "gold", purity: "22K" },
+    { id: "5", name: "Diamond Pendant Chain", price: 156000, image: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?q=80&w=800", category: "necklaces", metal: "gold", purity: "22K" },
     { id: "6", name: "Layered Gold Necklace", price: 92000, image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&q=80", category: "necklaces", metal: "gold", purity: "22K" },
     { id: "7", name: "Diamond Stud Earrings", price: 68000, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80", category: "earrings", metal: "gold", purity: "18K" },
     { id: "8", name: "Gold Jhumka Earrings", price: 42000, image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?w=600&q=80", category: "earrings", metal: "gold", purity: "22K" },
@@ -23,7 +23,7 @@ const allProducts = [
     { id: "15", name: "Temple Gold Necklace", price: 175000, image: "https://images.unsplash.com/photo-1611107683227-e9060eccd846?w=600&q=80", category: "necklaces", metal: "gold", purity: "22K" },
     { id: "16", name: "Polki Diamond Set", price: 380000, image: "https://images.unsplash.com/photo-1535556116002-6281ff3e9f36?w=600&q=80", category: "bridal", metal: "gold", purity: "22K" },
     { id: "17", name: "Chandelier Earrings", price: 125000, image: "https://images.unsplash.com/photo-1629224316810-9d8805b95e76?w=600&q=80", category: "earrings", metal: "gold", purity: "18K" },
-    { id: "18", name: "Minimalist Gold Chain", price: 35000, image: "https://images.unsplash.com/photo-1611085510577-04f1fc29796a?auto=format&fit=crop&q=80&w=800", category: "necklaces", metal: "gold", purity: "18K" },
+    { id: "18", name: "Minimalist Gold Chain", price: 35000, image: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?q=80&w=800", category: "necklaces", metal: "gold", purity: "18K" },
   { id: "19", name: "Antique Finish Bangles", price: 145000, image: "https://images.unsplash.com/photo-1610694955371-d4a3e0ce4b52?w=600&q=80", category: "bridal", metal: "gold", purity: "22K" },
   { id: "20", name: "Contemporary Pearl Studs", price: 28000, image: "https://images.unsplash.com/photo-1590548784585-643d2b9f2925?w=600&q=80", category: "earrings", metal: "gold", purity: "18K" },
 ];
